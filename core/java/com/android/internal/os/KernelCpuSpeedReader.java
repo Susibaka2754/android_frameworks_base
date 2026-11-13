@@ -25,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * Reads CPU time of a specific core spent at various frequencies and provides a delta from the
@@ -49,8 +50,8 @@ public class KernelCpuSpeedReader {
      * @param cpuNumber The cpu (cpu0, cpu1, etc) whose state to read.
      */
     public KernelCpuSpeedReader(int cpuNumber, int numSpeedSteps) {
-        mProcFile = String.format("/sys/devices/system/cpu/cpu%d/cpufreq/stats/time_in_state",
-                cpuNumber);
+        mProcFile = String.format(Locale.ROOT,
+                "/sys/devices/system/cpu/cpu%d/cpufreq/stats/time_in_state", cpuNumber);
         mNumSpeedSteps = numSpeedSteps;
         mLastSpeedTimesMs = new long[numSpeedSteps];
         mDeltaSpeedTimesMs = new long[numSpeedSteps];
